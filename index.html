@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="fpurl : FilePicker.io URL: A ruby wrapper for downloading and working with FilePicker.io URLs" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>fpurl</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/adamburmister/fpurl">View on GitHub</a>
+
+          <h1 id="project_title">fpurl</h1>
+          <h2 id="project_tagline">FilePicker.io URL: A ruby wrapper for downloading and working with FilePicker.io URLs</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/adamburmister/fpurl/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/adamburmister/fpurl/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>FPUrl</h1>
+
+<p>FPUrl is an ruby wrapper for working with Filepicker.IO URLs.</p>
+
+<h3>What is FilePicker.io?</h3>
+
+<p><a href="http://www.filepicker.io">FilePicker.io</a> provides client-side mechanisms for uploading files, removing the backend handling to their platform. Files can be uploaded from disk, or cloud services like Dropbox. 
+These uploads are passed around with pointers: which are simple URLs.</p>
+
+<h2>What FPUrl does</h2>
+
+<p>FPUrl provides ways of working with those FilePicker.io URLs. 
+For instance, it provides methods for:</p>
+
+<ul>
+<li>Downloading files</li>
+<li>Revoking file access (removing the file from FilePicker.io)</li>
+<li>Retrieving the filename from the URL</li>
+</ul><h2>Example Usage</h2>
+
+<p><code>
+@fp = FPUrl.new(API_KEY, FP_URL)
+filename = @fp.filename()
+@fp.download("/tmp/myfile")
+file = @fp.download("/tmp/", { :use_original_filename =&gt; true })
+file = @fp.download("/tmp/, { :use_original_filename =&gt; true, :revoke =&gt; true })
+</code></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">fpurl maintained by <a href="https://github.com/adamburmister">adamburmister</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
