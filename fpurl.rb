@@ -74,7 +74,6 @@ class FPUrl
     when Net::HTTPForbidden
       #Rails.logger.error "Could not get filename for #{@uri.request_uri}, got FORBIDDEN"
     else
-      puts response.inspect
       if response['content-disposition']
         disposition = response['content-disposition']
         filename = disposition.match(/^attachment; filename="(.+)"$/)[1] if disposition
