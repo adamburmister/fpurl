@@ -74,8 +74,15 @@ class FPUrl
     when Net::HTTPForbidden
       #Rails.logger.error "Could not get filename for #{@uri.request_uri}, got FORBIDDEN"
     else
-      disposition = response['content-disposition']
-      filename = disposition.match(/^attachment; filename="(.+)"$/)[1] if disposition
+      puts response.inspect
+      if response['content-disposition']
+        disposition = response['content-disposition']
+        filename = disposition.match(/^attachment; filename="(.+)"$/)[1] if disposition
+      elsif response['X-File-Name']
+        filename = response['X-File-Name']
+      else
+        filename = File.basename(@uri.to_s)
+      end
       
       if filename
         # Split the name when finding a period which is preceded by some
@@ -91,9 +98,6 @@ class FPUrl
 
         # Finally, join the parts with a period and return the result
         filename = fn.join '.'
-      else
-        # The filename is nil - grab it from the URL instead
-        File.basename(@uri.to_s)
       end
     end
     
