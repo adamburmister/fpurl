@@ -23,7 +23,7 @@ describe :FPUrl do
   it "should download to a given filename" do
     path = "/tmp/test_download_#{Time.now.to_i}.pdf"
     @fp.download(path)
-    
+
     File.exists?(path).should be_true
     File.delete(path) # cleanup
   end
@@ -31,7 +31,7 @@ describe :FPUrl do
   it "should download to the original filename to a given path" do
     path = "/tmp/notyetmade/"
     file = @fp.download(path, { :use_original_filename => true })
-    
+
     File.exists?(path).should be_true
     File.delete(file.path) # cleanup
   end
@@ -39,7 +39,7 @@ describe :FPUrl do
   it "should download and revoke permissions" do
     path = "/tmp/"
     file = @fp.download(path, { :use_original_filename => true, :revoke => true })
-    
+
     File.exists?(path).should be_true
     File.delete(file.path) # cleanup
 

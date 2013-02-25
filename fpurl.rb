@@ -32,7 +32,7 @@ class FPUrl
 
     output_dir = File.dirname(output_path)
     FileUtils.mkdir_p(output_dir) if !Dir.exists?(output_dir)
-    
+
     # Call wget to download the file
     exit_code = 0
     # Continue downloads, create directories, 10s timeout, retry 3 times, output to output_path
@@ -61,7 +61,7 @@ class FPUrl
     when Net::HTTPForbidden
       #Rails.logger.error "Could not revoke access to #{@uri.request_uri}, got FORBIDDEN"
     end
-  end  
+  end
 
   # Get the filename of the file on an uploaded URL
   # @return {String} filename for the file uploaded to that URL
@@ -70,19 +70,18 @@ class FPUrl
     response = http.request(request)
     filename = nil
 
+    return "" if !response
+
     case response
     when Net::HTTPForbidden
       #Rails.logger.error "Could not get filename for #{@uri.request_uri}, got FORBIDDEN"
     else
-      if response['content-disposition']
-        disposition = response['content-disposition']
-        filename = disposition.match(/^attachment; filename="(.+)"$/)[1] if disposition
-      elsif response['X-File-Name']
+      if response['X-File-Name']
         filename = response['X-File-Name']
       else
         filename = File.basename(@uri.to_s)
       end
-      
+
       if filename
         # Split the name when finding a period which is preceded by some
         # character, and is followed by some character other than a period,
@@ -99,7 +98,7 @@ class FPUrl
         filename = fn.join '.'
       end
     end
-    
+
     return filename
   end
 
